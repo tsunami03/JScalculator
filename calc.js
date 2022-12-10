@@ -30,7 +30,6 @@ numberButtons[numberButtons.length - 1].addEventListener("click", function () {
 let mathButtons = document.querySelectorAll(".math");
 let prevButton = document.querySelector(".math.addition");
 
-
 for (let i = 0; i < mathButtons.length; i++) {
     mathButtons[i].addEventListener("click", function () {
         equalFlag = 0;
@@ -71,7 +70,6 @@ function handleMath(className) {
 //showing final result
 
 let equalButton = document.querySelector(".result");
-
 
 equalButton.addEventListener("click", function () {
     if (equalFlag != 1) {
