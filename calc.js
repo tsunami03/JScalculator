@@ -1,6 +1,7 @@
 let display = document.querySelector(".calc");
 let buffer = "";
 let currentValue = 0;
+let equalFlag = 0;
 
 let numberButtons = document.querySelectorAll(".num");
 
@@ -8,6 +9,10 @@ let numberButtons = document.querySelectorAll(".num");
 
 for (let i = 0; i < numberButtons.length - 1; i++) {
     numberButtons[i].addEventListener("click", function () {
+        if (equalFlag == 1) {
+            buffer = currentValue;
+            currentValue = 0;
+        }
         buffer += numberButtons[i].innerText;
         refreshDisplay();
     });
@@ -25,8 +30,10 @@ numberButtons[numberButtons.length - 1].addEventListener("click", function () {
 let mathButtons = document.querySelectorAll(".math");
 let prevButton = document.querySelector(".math.addition");
 
+
 for (let i = 0; i < mathButtons.length; i++) {
     mathButtons[i].addEventListener("click", function () {
+        equalFlag = 0;
         handleMath(prevButton.className);
         prevButton = mathButtons[i];
     })
@@ -65,10 +72,15 @@ function handleMath(className) {
 
 let equalButton = document.querySelector(".result");
 
+
 equalButton.addEventListener("click", function () {
-    handleMath(prevButton.className);
-    prevButton = document.querySelector(".math.addition");
+    if (equalFlag != 1) {
+        handleMath(prevButton.className);
+        prevButton = document.querySelector(".math.addition");
+    }
+    equalFlag = 1;
     display.innerText = currentValue;
+
 })
 
 //clear and backspace buttons
@@ -78,6 +90,7 @@ let backspaceButton = document.querySelector(".backspace");
 
 clearButton.addEventListener("click", function () {
     currentValue = 0;
+    equalFlag = 0;
     buffer = "";
     resetDisplay();
 })
