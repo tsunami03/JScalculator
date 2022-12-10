@@ -12,6 +12,7 @@ for (let i = 0; i < numberButtons.length - 1; i++) {
         if (equalFlag == 1) {
             buffer = currentValue;
             currentValue = 0;
+            equalFlag = 0;
         }
         buffer += numberButtons[i].innerText;
         refreshDisplay();
